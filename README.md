@@ -1,68 +1,43 @@
-Project: Real-Time ASL Alphabet Recognition
-Course: CENG 476 - Deep Learning
-Group Members: ABDIRAHMAN AHMED HUSSEIN (230446614) 
-               İLTER KARAMÜFTÜOĞLU (200444078)
+# 🖐 ASL Alphabet Recognition
 
-📁 Project Structure
+> Real-time American Sign Language recognition using a custom CNN and computer vision.
 
-ASL_Project/
-│
-├── main.py               # Training script (CNN + augmentation + scheduler)
-├── live_demo.py          # Real-time ASL recognition interface
-├── create_charts.py      # Generates confusion matrix & accuracy charts
-├── asl_robot_brain.pth   # Saved model weights
-├── asl_alphabet_train/   # Dataset folder (29 classes)
-├── error_gallery/        # Auto-generated misclassified images
-├── loss_curve.png
-├── accuracy_curve.png
-├── confusion_matrix.png
-└── class_accuracy_chart.png
+**Course:** CENG 476 — Deep Learning
+**Team:** Abdirahman Ahmed Hussein · İlter Karamüftüoğlu
 
 
-=== HOW TO RUN ===
 
-1. PREREQUISITES
-   Install the required libraries using pip:
-   pip install torch torchvision opencv-python pyttsx3 scikit-learn seaborn matplotlib
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 
-2. Model Architecture (Custom CNN)
-Input: 64×64 RGB Image
-Feature Extractor:
-- Conv(3→32) → BN → ReLU → MaxPool
-- Conv(32→64) → BN → ReLU → MaxPool
-- Conv(64→128) → BN → ReLU → MaxPool
 
-Classifier:
-- Flatten
-- Dropout(0.5)
-- Linear(8192 → 512)
-- ReLU
-- Dropout(0.5)
-- Linear(512 → 29)
 
-3. TRAINING (Optional)
-   The model is already trained and saved as 'asl_robot_brain.pth'.
-   To retrain from scratch (25 Epochs):
-   > python main.py
-   (Note: This script enforces CPU usage to avoid compatibility issues with newer GPUs).
 
-4. REPORT CHARTS
-   To generate the Confusion Matrix and Accuracy/Loss plots:
-   > python create_charts.py
-   (Output files: confusion_matrix.png, class_accuracy_chart.png)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
 
-5. LIVE DEMO (The Main Application)
-   To run the real-time assistive interface:
-   > python live_demo.py
 
-   Controls:
-   - Hold a sign for 1.5s: Auto-types the letter.
-   - ENTER: Speaks the current sentence aloud.
-   - SPACE: Adds a space.
-   - D: Deletes the last character.
-   - Q: Quits the application.
-   - A-Z Keys: 'Teacher Mode' (Saves the current frame as a correction for that letter).
 
-6. NOTES
-   - Ensure the 'asl_alphabet_train' folder is in the root directory.
-   - 'asl_robot_brain.pth' must be present for the demo to work.
+
+![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white)
+
+
+
+---
+
+## Overview
+
+An assistive communication tool that recognizes ASL hand signs in real time via webcam. The system classifies 29 letter classes, auto-types recognized letters, and speaks sentences aloud — designed to bridge communication for the deaf and hard-of-hearing community.
+
+---
+
+## Model Architecture
+
+Custom CNN trained on 64×64 RGB images across 29 classes.
+
+```text
+Input (64×64 RGB)
+  → Conv(3→32)   → BatchNorm → ReLU → MaxPool
+  → Conv(32→64)  → BatchNorm → ReLU → MaxPool
+  → Conv(64→128) → BatchNorm → ReLU → MaxPool
+  → Flatten → Dropout(0.5)
+  → Linear(8192→512) → ReLU → Dropout(0.5)
+  → Linear(512→29)
